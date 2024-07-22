@@ -11,7 +11,6 @@ class JapanesePlayersController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index(Request $request, $country_id)
     public function index()
     {
         $japanesePlayers = JapanesePlayer::all();

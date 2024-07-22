@@ -17,21 +17,20 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white dark:bg-slate-800">
-                    {{-- @foreach ($countries as $country) --}}
+                    @foreach ($countries as $country)
                     <tr>
                         <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400"
                         >
-                            hoge
-                            {{-- <a href="{{ route('japan.index') }}">
+                            <a href="{{ route('japan.index') }}">
                                 {{ $country->country_name }}
-                            </a> --}}
+                            </a>
                         </td>
                     </tr>
-                    {{-- @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>
-        {{-- {{ $countries->links() }} --}}
+        {{ $countries->links() }}
     </div>
 </div>
 @endsection("content")
