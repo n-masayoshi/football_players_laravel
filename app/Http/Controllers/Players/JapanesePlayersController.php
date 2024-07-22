@@ -22,7 +22,6 @@ class JapanesePlayersController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
