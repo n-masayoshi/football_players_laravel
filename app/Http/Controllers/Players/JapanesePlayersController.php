@@ -15,7 +15,7 @@ class JapanesePlayersController extends Controller
     public function index()
     {
         $japanesePlayers = JapanesePlayer::all();
-        return view("players.japan.index", compact('japanesePlayers'));
+        return view("Players.Japan.index", compact('japanesePlayers'));
     }
 
     /**
