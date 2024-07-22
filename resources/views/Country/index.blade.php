@@ -31,7 +31,7 @@
                 <!-- ページネーションリンクを表示 -->
             </table>
         </div>
-        {{ $countries->links() }}
+        {{-- {{ $countries->links() }} --}}
     </div>
 </div>
 @endsection("content")

@@ -14,7 +14,7 @@ class CountriesController extends Controller
     {
         // $countries = Country::select('country_name')->paginate(5);
         $countries = Country::all();
-        dump($countries);
+        // dump($countries);
         return view("country.index", compact('countries'));
     }
 
