@@ -17,18 +17,18 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white dark:bg-slate-800">
-                    @foreach ($countries as $country)
+                    {{-- @foreach ($countries as $country) --}}
                     <tr>
                         <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400"
                         >
-                            <a href="{{ route('japan.index') }}">
+                            hoge
+                            {{-- <a href="{{ route('japan.index') }}">
                                 {{ $country->country_name }}
-                            </a>
+                            </a> --}}
                         </td>
                     </tr>
-                    @endforeach
+                    {{-- @endforeach --}}
                 </tbody>
-                <!-- ページネーションリンクを表示 -->
             </table>
         </div>
         {{-- {{ $countries->links() }} --}}
