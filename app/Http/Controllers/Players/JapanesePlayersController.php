@@ -5,6 +5,12 @@ namespace App\Http\Controllers\Players;
 use App\Models\Players\JapanesePlayer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Exception;
+use Illuminate\Auth\Events\Registered;
 
 class JapanesePlayersController extends Controller
 {
@@ -32,17 +38,40 @@ class JapanesePlayersController extends Controller
     // public function store(Request $request): RedirectResponse
     public function store(Request $request)
     {
-        // try
-        // {
-        //     DB::transaction(function use($request) {
-        //         $japanesePlayers = JapanesePlayer::create
-        //         ([
-        //             ''
-        //         ]);
-        //     });
-        // }
+        try {
+            $request->validate([
+                'country_id' => ['required', 'integer'],
+                'player_name' => ['required', 'string'],
+                'player_age' => ['required', 'integer'],
+                'club_team_id' => ['required', 'integer'],
+                'club_team_name' => ['required', 'string'],
+            ]);
+        } catch (Exception $e) {
+            Log::debug($e);
+            throw $e;
+        }
 
-        // return to_route('Players.Japan.index');
+        DB::beginTransaction();
+        try {
+            $japanesePlayers = JapanesePlayer::create([
+                'country_id' => $request->country_id,
+                'player_name' => $request->player_name,
+                'player_age' => $request->player_age,
+                'club_team_id' => $request->club_team_id,
+                'club_team_name' => $request->club_team_name,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+            DB::commit();
+        } catch (\Exception $e) {
+            Log::debug($e);
+            DB::rollback();
+            return redirect()->back()->with('error', 'データの保存に失敗しました。')->withInput();
+        }
+
+        event(new Registered($japanesePlayers));
+
+        return redirect(RouteServiceProvider::JAPANESE_PLAYERS_INDEX);
     }
 
     /**
