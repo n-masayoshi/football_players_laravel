@@ -1,66 +1,60 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+### Heroku公開済：随時、更新していきます。
+- https://footballplayerswithlaravel-9ae6ab4953e9.herokuapp.com/countries
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# サッカー選手図鑑
+## 構成(とりあえず)
+- 国、クラブチームのタグ(nav-bar)をヘッダーに作る。</br>
+    - 初期表示は、とりあえず、国一覧にする。
+    - 国
+        - 選手名(player_name), 年齢(age), 所属チーム(club_team_name)
 
-## About Laravel
+    - クラブ
+        - クラムチーム名(club_team_name)
+            - 選手名(player_name), 年齢(age), 国名(country_name)
+# DB
+## DB構成図
+## テーブル一覧
+### 国マスタ：m_countries
+| 国 | m_country |  |  |
+| ---- | ---- | ---- | ---- |
+| country_id | int | key |  |
+| country_name | string | char(50) | NOT NULL |
+- [ ] country_id
+- [ ] 国名(country_name)
+- [ ] 国旗の画像(後で追加, country_flag)(後で追加)
+- [ ] W杯優勝回数(後で追加, int)
+- [ ] プレイヤー数(後で追加, int)
+    - [ ] プレイヤー(player_name)一覧画面に遷移できるようにする
+        - クラブチーム名
+        - age
+        - position(後で追加)
+        - 代表通算ゴール数(後で追加)
+        - 代表通算アシスト数(後で追加)
+        - 過去の所属クラブチーム(後で追加)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### クラブチームマスタ：m_club_teams
+- [ ] club_team_id
+- [ ] club_team_name
+- [ ] player_count:プレイヤー数(後で追加)
+- [ ] リーグ優勝回数(後で追加)
+- [ ] UEFA Champions League優勝回数(後で追加)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 国別選手一覧：t_<country>_players
+テーブル名に、国名が入る。例、t_japan_players, t_spain_players
+それぞれ、以下のカラムは共通
+- [ ] club_team_id
+- [ ] player_name
+- [ ] age
+- [ ] 代表選手として引退済みか否か：national_team_retired_flag
+- [ ] 選手として引退済みか否か：player_retired_flag
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+国名をクリックして、選手一覧を表示する際は、t_japan_players のデータを引っ張ってくればいい
+- TODO:どうやって、国別テーブルを指定するか？
+  - CASE式で、country_id ごとに処理を分ける？
+  - どの国をクリックしてもコードの中身は変わらない。引数で渡した値を使って、どのテーブル(国)からデータ(選手)を引っ張ってくるか？のロジックが重要。
+    - コード自体は、クラス化orメソッド化して、それを呼び出すようにする。
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### クラブチーム別選手一覧：
+結合条件
+- クラブチームid = 国別選手一覧.clubTeamId
+  - m_club_teams.club_team_id = t_japan_players.club_team_id
