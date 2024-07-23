@@ -18,7 +18,10 @@ use App\Http\Controllers\Players\JapanesePlayersController;
 // });
 
 Route::get("/countries", [CountriesController::class, "index"]);
+
 Route::get("/japan/players", [JapanesePlayersController::class, "index"])->name('japan.index');
+Route::get("/japan/players/create", [JapanesePlayersController::class, "create"])->name('japan.create');
+Route::get("/japan/players/store", [JapanesePlayersController::class, "store"])->name('japan.store');
 
 Route::get('/', function () {
     return view('welcome');

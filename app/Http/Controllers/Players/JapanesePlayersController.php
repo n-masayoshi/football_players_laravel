@@ -22,14 +22,27 @@ class JapanesePlayersController extends Controller
      */
     public function create()
     {
+        return view("Players.Japan.create");
     }
 
     /**
      * Store a newly created resource in storage.
+     * 日本人選手を登録する
      */
+    // public function store(Request $request): RedirectResponse
     public function store(Request $request)
     {
-        //
+        // try
+        // {
+        //     DB::transaction(function use($request) {
+        //         $japanesePlayers = JapanesePlayer::create
+        //         ([
+        //             ''
+        //         ]);
+        //     });
+        // }
+
+        // return to_route('Players.Japan.index');
     }
 
     /**

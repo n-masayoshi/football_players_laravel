@@ -11,7 +11,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <header class="navbar navbar-dark bg-dark min-h-10 py-4">
+        <header class="navbar navbar-dark bg-dark min-h-10 py-4 max-w-screen-lg mx-auto">
             <div class="container text-xl mx-auto my-0">
                 <a href="/" class="navbar-brand">{{ config("app.name") }}</a>
             </div>
