@@ -6,25 +6,16 @@ use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Http\Services\GetCountryService;
 use Illuminate\View\View;
+use App\Models\Players;
 
 
-class CountriesController extends Controller
+class EachCountriesPlayerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index($country_id): View
     {
-        $countries = Country::select('country_name')->paginate(5);
-        return view("Country.index", compact('countries'));
-    }
-
-    /**
-     * $country_id を使って、どの国を判別する
-     */
-    public function search($country_id)
-    {
-        // TODO: $country_idを使って、国名を判別して、その国の選手一覧ページを開く。
         // $country_idを使って、どの国かを判別するメソッドを書く。
         $country_service = new GetCountryService();
         $country_name = $country_service->getCountryName($country_id);

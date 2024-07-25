@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\Players\JapanesePlayersController;
+use App\Http\Controllers\EachCountriesPlayerController;
 
 /*
 | Web Routes
@@ -18,6 +19,9 @@ use App\Http\Controllers\Players\JapanesePlayersController;
 // });
 
 Route::get("/countries", [CountriesController::class, "index"]);
+
+// TODO: どうするか？
+Route::get("/countries", [EachCountriesPlayerController::class, "index"])->name('eachCountriesPlayer.index');
 
 Route::get("/japan/players", [JapanesePlayersController::class, "index"])->name('japan.index');
 Route::get("/japan/players/create", [JapanesePlayersController::class, "create"])->name('japan.create');
