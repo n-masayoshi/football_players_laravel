@@ -2,6 +2,7 @@
 @section("content")
 
 <div class="row max-w-screen-lg mx-auto">
+    <x-flash-message status="session('status')" />
     <div class="col-md-8 col-lg-9">
         <div class="table-responsive mb-12">
             <table class="border-collapse table-auto w-full text-sm">
@@ -19,8 +20,8 @@
                 <tbody class="bg-white dark:bg-slate-800">
                     @foreach ($countries as $country)
                     <tr>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
-                            <a href="{{ route('japan.index') }}">
+                        <td class="border-b p-4 pl-8 text-black">
+                            <a href="{{ route('players.index', ['country_id' => $country->country_id]) }}">
                                 {{ $country->country_name }}
                             </a>
                         </td>

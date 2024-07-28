@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HelloController;
 use App\Http\Controllers\CountriesController;
-use App\Http\Controllers\Players\JapanesePlayersController;
+use App\Http\Controllers\PlayersController;
+use App\Http\Controllers\JapanesePlayersController;
 
 /*
 | Web Routes
@@ -13,19 +13,19 @@ use App\Http\Controllers\Players\JapanesePlayersController;
 | all of them will be assigned to the "web" middleware group.
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get("/countries", [CountriesController::class, "index"]);
-
-Route::get("/japan/players", [JapanesePlayersController::class, "index"])->name('japan.index');
-Route::get("/japan/players/create", [JapanesePlayersController::class, "create"])->name('japan.create');
-Route::post("/japan/players/create", [JapanesePlayersController::class, "store"])->name('japan.store');
-
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/countries', [CountriesController::class, 'index'])->name('country.index');
+Route::get('/countries/{country_id}', [CountriesController::class, 'show'])->name('countries.show');
+
+Route::get("/players/japan/{country_id}", [PlayersController::class, "index"])->name('players.index');
+
+Route::get("/japan/players/create", [PlayersController::class, "create"])->name('players.create');
+
+Route::post("/japan/players/create", [JapanesePlayersController::class, "store"])->name('japan.store');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
