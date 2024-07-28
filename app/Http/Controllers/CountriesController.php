@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use App\Http\Controllers\Controller;
+use App\Models\Players\JapanesePlayer;
 
 class CountriesController extends Controller
 {
@@ -12,8 +15,17 @@ class CountriesController extends Controller
      */
     public function index()
     {
-        $countries = Country::select('country_name')->paginate(5);
+        $countries = Country::select('country_id', 'country_name')->paginate(5);
         return view("Country.index", compact('countries'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(int $country_id): View
+    {
+        $japanesePlayers = JapanesePlayer::all();
+        return view("Players.Japan.index", compact('japanesePlayers'));
     }
 
     /**
@@ -28,14 +40,6 @@ class CountriesController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
     {
         //
     }

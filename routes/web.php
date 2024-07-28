@@ -17,7 +17,8 @@ use App\Http\Controllers\Players\JapanesePlayersController;
 //     return view('welcome');
 // });
 
-Route::get("/countries", [CountriesController::class, "index"]);
+Route::get('/countries', [CountriesController::class, 'index']);
+Route::get('/countries/{country_id}', [CountriesController::class, 'show'])->name('countries.show');
 
 Route::get("/japan/players", [JapanesePlayersController::class, "index"])->name('japan.index');
 Route::get("/japan/players/create", [JapanesePlayersController::class, "create"])->name('japan.create');
