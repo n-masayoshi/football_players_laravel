@@ -1,26 +1,44 @@
 <?php
 
-namespace App\Http\Controllers\Players;
+namespace App\Http\Controllers;
 
-use App\Models\Players\JapanesePlayer;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Constants\CountriesName;
 use App\Providers\RouteServiceProvider;
-use Carbon\Carbon;
+use App\Http\Service\GetCountryService;
+use App\Models\Players\JapanesePlayer;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Carbon\Carbon;
 use Exception;
-use Illuminate\Auth\Events\Registered;
 
-class JapanesePlayersController extends Controller
+class PlayersController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(int $country_id)
     {
-        $japanesePlayers = JapanesePlayer::all();
-        return view("Players.Japan.index", compact('japanesePlayers'));
+        // TODO: 7/28現在、日本人選手以外データがないので。
+        if ($country_id != CountriesName::JAPAN) {
+            return redirect('/countries')
+                ->with([
+                    'message' => 'データが存在しません。',
+                    'status' => 'alert'
+                ]);
+        }
+
+        $getCountryName = new GetCountryService();
+        $country = $getCountryName->getCountryNameAndModel($country_id);
+
+
+        return view("Players.{$country[0]}.index", ['players' => $country[1]]);
+
+        // $japanesePlayers = JapanesePlayer::all();
+        // return view("Players.Japan.index", compact('japanesePlayers'));
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use Illuminate\Http\Request;
+use Illuminate\Http\Service\GetCountryService;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Models\Players\JapanesePlayer;
@@ -13,7 +14,7 @@ class CountriesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         $countries = Country::select('country_id', 'country_name')->paginate(5);
         return view("Country.index", compact('countries'));
@@ -22,10 +23,8 @@ class CountriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $country_id): View
+    public function show()
     {
-        $japanesePlayers = JapanesePlayer::all();
-        return view("Players.Japan.index", compact('japanesePlayers'));
     }
 
     /**

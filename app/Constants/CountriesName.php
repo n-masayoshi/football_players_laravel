@@ -2,8 +2,6 @@
 
 namespace App\Constants;
 
-use Ramsey\Uuid\Type\Integer;
-
 // 各国のID
 class CountriesName
 {
