@@ -23,7 +23,7 @@ Route::get('/countries/{country_id}', [CountriesController::class, 'show'])->nam
 
 Route::get("/players/japan/{country_id}", [PlayersController::class, "index"])->name('players.index');
 
-Route::get("/japan/players/create", [PlayersController::class, "create"])->name('players.create');
+Route::get("/japan/players/create/{country_id}", [PlayersController::class, "create"])->name('players.create');
 
 Route::post("/japan/players/create", [JapanesePlayersController::class, "store"])->name('japan.store');
 

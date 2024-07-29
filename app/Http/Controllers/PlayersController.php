@@ -44,9 +44,9 @@ class PlayersController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(int $country_id)
     {
-        return view("Players.Japan.create");
+        return view("Players.Japan.create", ['country_id' => $country_id]);
     }
 
     /**
@@ -54,11 +54,11 @@ class PlayersController extends Controller
      * 日本人選手を登録する
      */
     // public function store(Request $request): RedirectResponse
-    public function store(Request $request)
+    public function store(Request $request, int $country_id)
     {
         try {
             $request->validate([
-                'country_id' => ['required', 'integer'],
+                // 'country_id' => ['required', 'integer'],
                 'player_name' => ['required', 'string'],
                 'player_age' => ['required', 'integer'],
                 'club_team_id' => ['required', 'integer'],
@@ -72,7 +72,7 @@ class PlayersController extends Controller
         DB::beginTransaction();
         try {
             $japanesePlayers = JapanesePlayer::create([
-                'country_id' => $request->country_id,
+                'country_id' => $country_id,
                 'player_name' => $request->player_name,
                 'player_age' => $request->player_age,
                 'club_team_id' => $request->club_team_id,

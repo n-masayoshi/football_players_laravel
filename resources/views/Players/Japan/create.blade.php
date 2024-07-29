@@ -7,7 +7,7 @@
             @csrf
             <div class="mb-5">
                 <label for="country_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">国 ID</label>
-                <input type="number" id="country_id" name="country_id" value="{{ old('country_id') }}" class="mb-2 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="国 id" required />
+                <input type="number" id="country_id" name="country_id" value="<?= $country_id ?>" class="mb-2 shadow-sm bg-gray-50 border border-gray-300 text-gray-400 text-sm rounded-lg focus:ring-gray-50 focus:border-gray-300 block w-full p-2.5 placeholder="国 id" readonly />
             </div>
             <div class="mb-5">
                 <label for="player_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">選手名</label>
