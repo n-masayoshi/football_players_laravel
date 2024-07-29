@@ -13,10 +13,11 @@ use App\Http\Controllers\JapanesePlayersController;
 | all of them will be assigned to the "web" middleware group.
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+Route::get('/', [CountriesController::class, 'index'])->name('country.index');
 Route::get('/countries', [CountriesController::class, 'index'])->name('country.index');
 Route::get('/countries/{country_id}', [CountriesController::class, 'show'])->name('countries.show');
 
