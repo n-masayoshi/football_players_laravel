@@ -20,8 +20,17 @@ class PlayersController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public function index(Request $request): View
     public function index(int $country_id)
     {
+        // if (isset($request) && $request->reset) {
+        //     $request = new Request();
+        // }
+
+        // if ($request->country_id && $request->country_id != '') {
+        //     // TODO;
+        // }
+
         // TODO: 7/28現在、日本人選手以外データがないので。
         if ($country_id != CountriesName::JAPAN) {
             return redirect('/countries')

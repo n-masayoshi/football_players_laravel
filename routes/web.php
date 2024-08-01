@@ -22,6 +22,7 @@ Route::get('/countries', [CountriesController::class, 'index'])->name('country.i
 Route::get('/countries/{country_id}', [CountriesController::class, 'show'])->name('countries.show');
 
 Route::get("/players/japan/{country_id}", [PlayersController::class, "index"])->name('players.index');
+// Route::post("/players/japan/{country_id}", [PlayersController::class, "index"])->name('players.index');
 
 Route::get("/japan/players/create/{country_id}", [PlayersController::class, "create"])->name('players.create');
 

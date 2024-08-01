@@ -9,7 +9,8 @@
     </h2>
     <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
         <div class="text-gray-900 p-5 border border-sky-200 dark:border-sky-700 dark:bg-sky-900">
-            <form class="space-y-4" method="POST" action="">
+            {{-- <form class="space-y-4" method="POST" action="{{ route('players.index') }}"> --}}
+            <form class="space-y-4" method="POST">
                 @csrf
                 <div class="flex">
                     <div class="w-1/4 px-3">
@@ -24,6 +25,14 @@
                         <x-input-label for="club_team_name" :value="'クラブチーム'" />
                         <x-text-input id="club_team_name" class="block mt-1 w-full" type="text" name="club_team_name" :value="old('club_team_name', $request->club_team_name)" for="club_team_name" :value="''" autocomplete="選手名" />
                     </div>
+                </div>
+                <div class="text-center pt-4 flex justify-end">
+                    <button type="submit" class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-md">
+                        検索
+                    </button>
+                    <button type="submit" name="reset" value="1" class="ml-3 py-2 px-4 bg-orange-400 hover:bg-orange-500 text-white rounded-md">
+                        リセット
+                    </button>
                 </div>
             </form>
         </div>
