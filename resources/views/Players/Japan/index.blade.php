@@ -3,12 +3,9 @@
 
 <div class="row max-w-screen-lg mx-auto">
     <div class="col-md-8 col-lg-9">
-        <div class="mb-8 flex justify-end">
-            <a href="{{ route('players.create', ['country_id' => $players[0]->country_id]) }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-6 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                選手登録
-            </a>
-        </div>
-        <div class="table-responsive mb-12">
+        @include('players.japan.search-form')
+
+        <div class="table-responsive mt-8 mb-12">
             <table class="border-collapse table-auto w-full text-sm">
                 <thead>
                     <tr>
@@ -31,6 +28,11 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="mb-8 flex justify-end">
+            <a href="{{ route('players.create', ['country_id' => $players[0]->country_id]) }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-6 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                選手登録
+            </a>
         </div>
         {{-- {{ $countries->links() }} --}}
     </div>

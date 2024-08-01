@@ -7,6 +7,11 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <link href="https://cdn.jsdelivr.net/npm/flowbite@latest/dist/flowbite.min.css" rel="stylesheet">
+
+        <!-- Flowbite JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@latest/dist/flowbite.min.js"></script>
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
