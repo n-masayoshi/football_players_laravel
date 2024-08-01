@@ -3,7 +3,7 @@
 
 <div class="row max-w-screen-lg mx-auto">
     <div class="col-md-8 col-lg-9">
-        @include('players.japan.search-form')
+        @include('Players.Japan.search-form')
 
         <div class="table-responsive mt-8 mb-12">
             <table class="border-collapse table-auto w-full text-sm">
