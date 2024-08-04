@@ -11,27 +11,22 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\View;
 use Carbon\Carbon;
 use Exception;
+use PhpParser\Node\Expr\Empty_;
 
 class PlayersController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    // public function index(Request $request): View
+    // public function index(int $country_id)
+
     public function index(int $country_id)
     {
-        // if (isset($request) && $request->reset) {
-        //     $request = new Request();
-        // }
-
-        // if ($request->country_id && $request->country_id != '') {
-        //     // TODO;
-        // }
-
-        // TODO: 7/28現在、日本人選手以外データがないので。
+        // TODO: 現状、日本以外をクリックしたら、はじく制御になっている。
         if ($country_id != CountriesName::JAPAN) {
             return redirect('/countries')
                 ->with([
@@ -39,15 +34,47 @@ class PlayersController extends Controller
                     'status' => 'alert'
                 ]);
         }
+        $getCountry = new GetCountryService();
+        $country = $getCountry->getCountryNameAndModel($country_id);
+        $players = $country[1];
+        return view("Players.{$country[0]}.index", compact('players'));
+    }
 
-        $getCountryName = new GetCountryService();
-        $country = $getCountryName->getCountryNameAndModel($country_id);
+    /**
+     * 検索機能
+     */
+    public function search(Request $request)
+    {
+        if (isset($request) && $request->reset) {
+            $request = new Request();
+        }
 
+        $players = [];
+        $players_query = JapanesePlayer::query(); // クエリビルダ
 
-        return view("Players.{$country[0]}.index", ['players' => $country[1]]);
+        /**
+         * 選手名
+         */
+        if ($request->player_name && $request->player_name != '') {
+            $players_query->where('player_name', 'LIKE', '%' . $request->player_name . '%');
+        }
 
-        // $japanesePlayers = JapanesePlayer::all();
-        // return view("Players.Japan.index", compact('japanesePlayers'));
+        /**
+         * 年齢
+         */
+        if ($request->player_age && $request->player_age != '') {
+            $players_query->where('player_age', $request->player_age);
+        }
+
+        /**
+         * クラブチーム
+         */
+        if ($request->club_team_name && $request->club_team_name != '') {
+            $players_query->where('club_team_name', 'LIKE', '%' . $request->club_team_name . '%');
+        }
+
+        $players = $players_query->get();
+        return view("Players.Japan.index", compact('players'));
     }
 
     /**

@@ -9,8 +9,7 @@
     </h2>
     <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
         <div class="text-gray-900 p-5 border border-sky-200 dark:border-sky-700 dark:bg-sky-900">
-            {{-- <form class="space-y-4" method="POST" action="{{ route('players.index') }}"> --}}
-            <form class="space-y-4" method="POST">
+            <form class="space-y-4" method="POST" action="{{ route('players.search', ['country_id' => '1']) }}">
                 @csrf
                 <div class="flex">
                     <div class="w-1/4 px-3">
