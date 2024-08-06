@@ -49,6 +49,12 @@ class PlayersController extends Controller
             $request = new Request();
         }
 
+        $request->validate([
+            // ひらがな、カタカナ、漢字、英字は許可
+            'player_name' => ['nullable', 'string', 'regex:/^[ぁ-んァ-ヶ一-龠a-zA-Zー\s]+$/u'],
+            'club_team_name' => ['nullable', 'string', 'regex:/^[ぁ-んー　]+$/u'],
+        ]);
+
         $players = [];
         $players_query = JapanesePlayer::query(); // クエリビルダ
 

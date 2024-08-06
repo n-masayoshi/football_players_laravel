@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white dark:bg-slate-800">
-                    @foreach ($players as $player)
+                    @forelse ($players as $player)
                     <tr>
                         <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">{{ $player->player_name }}</td>
                         <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-4 text-slate-500 dark:text-slate-400">{{ $player->player_age }}</td>
@@ -25,14 +25,20 @@
                         <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-4 text-slate-500 dark:text-slate-400"></td>
                         <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-4 text-slate-500 dark:text-slate-400"></td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">該当する選手がいません。</td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
         <div class="mb-8 flex justify-end">
+            @if(isset($players[0]))
             <a href="{{ route('players.create', ['country_id' => $players[0]->country_id]) }}" class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-6 mb-2 dark:bg-blue-600 dark:hover:bg-blue-600 focus:outline-none dark:focus:ring-blue-600">
                 選手登録
             </a>
+            @endif
         </div>
         {{-- {{ $countries->links() }} --}}
     </div>
