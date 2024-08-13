@@ -18,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/countries';
+    public const ADMIN_HOME = '/admin/dashboard';
     public const JAPANESE_PLAYERS_INDEX = '/japan/players';
 
     /**
@@ -34,8 +35,15 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
+            Route::prefix('/')
+                ->as('user.')
+                ->middleware('web')
                 ->group(base_path('routes/web.php'));
+
+            Route::prefix('/admin')
+                ->as('admin.')
+                ->middleware('web')
+                ->group(base_path('routes/admin.php'));
         });
     }
 }
