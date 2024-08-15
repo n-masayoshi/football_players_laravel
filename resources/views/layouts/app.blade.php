@@ -14,6 +14,9 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        {{-- Pusher --}}
+        <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     </head>
     <body class="font-sans antialiased">
         <header class="navbar navbar-dark bg-dark min-h-10 py-4 max-w-screen-lg mx-auto">

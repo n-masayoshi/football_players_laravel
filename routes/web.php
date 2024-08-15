@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\PlayersController;
 use App\Http\Controllers\JapanesePlayersController;
+use App\Http\Controllers\PostController;
 
 /*
 | Web Routes
@@ -38,5 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Pusher
+Route::get("/posts", [PostController::class, 'index'])->name('post.index');
+Route::post("/posts/store", [PostController::class, 'store'])->name('post.store');
 
 require __DIR__ . '/auth.php';

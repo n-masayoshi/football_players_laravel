@@ -43,4 +43,4 @@
         {{-- {{ $countries->links() }} --}}
     </div>
 </div>
-@endsection("content")
+@endsection
