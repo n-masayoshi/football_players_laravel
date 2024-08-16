@@ -20,7 +20,7 @@ class PostController extends Controller
     public function index(): View
     {
         $posts = Post::all();
-        return view('Channels.index', compact('posts'));
+        return view('channels.index', compact('posts'));
     }
 
     /**
