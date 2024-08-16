@@ -18,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/countries';
+    public const CHATTING = '/posts';
     public const JAPANESE_PLAYERS_INDEX = '/japan/players';
 
     /**

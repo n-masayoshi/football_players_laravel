@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Events\Posted;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use App\Providers\RouteServiceProvider;
+use Exception;
 
 class PostController extends Controller
 {
@@ -30,7 +34,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): JsonResponse
+    public function store(Request $request)
     {
         try {
             $request->validate([
@@ -54,7 +58,7 @@ class PostController extends Controller
             return redirect()->back()->with('error', '投稿に失敗しました。')->withInput();
         }
 
-        return response()->json(['message' => '投稿しました。']);
+        return redirect(RouteServiceProvider::CHATTING);
     }
 
     /**
