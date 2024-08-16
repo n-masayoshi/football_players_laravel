@@ -95,7 +95,6 @@ class PlayersController extends Controller
      * Store a newly created resource in storage.
      * 日本人選手を登録する
      */
-    // public function store(Request $request): RedirectResponse
     public function store(Request $request, int $country_id)
     {
         try {
