@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1 class="max-w-screen-lg mx-auto">Pusher Test</h1>
+        <h1 class="max-w-screen-lg mx-auto">Pusher & Laravel Echo</h1>
         <div class="max-w-screen-sm mx-auto">
             <div>
                 <div>
