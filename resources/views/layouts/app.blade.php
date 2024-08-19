@@ -9,6 +9,9 @@
 
         <link href="https://cdn.jsdelivr.net/npm/flowbite@latest/dist/flowbite.min.css" rel="stylesheet">
 
+        {{-- css/app.css --}}
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
         <!-- Flowbite JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/flowbite@latest/dist/flowbite.min.js"></script>
 
@@ -19,13 +22,16 @@
         <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     </head>
     <body class="font-sans antialiased">
-        <header class="navbar navbar-dark bg-dark min-h-10 py-4 max-w-screen-lg mx-auto">
-            <div class="container text-xl mx-auto my-0">
-                <a href="/" class="navbar-brand">Football Players</a>
+        <div class="min-h-screen">
+            @include('layouts.navigation')
+            <header class="navbar navbar-dark bg-dark min-h-10 py-4 max-w-screen-lg mx-auto">
+                <div class="container text-xl mx-auto my-0">
+                    <a href="/" class="navbar-brand">Football Players</a>
+                </div>
+            </header>
+            <div class="container py-4 mx-auto my-0">
+                @yield("content")
             </div>
-        </header>
-        <div class="container py-4 mx-auto my-0">
-            @yield("content")
         </div>
     </body>
 </html>
