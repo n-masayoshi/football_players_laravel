@@ -39,7 +39,7 @@ class PostController extends Controller
         try {
             $request->validate([
                 // ひらがな、カタカナ、漢字、英字は許可 => NG: 記号
-                'text' => ['required', 'string', 'regex:/^[ぁ-んァ-ヶ一-龠a-zA-Zー\s]+$/u'],
+                'text' => ['required', 'string', 'regex:/^[ぁ-んァ-ヶ一-龠a-zA-Zー\s!?！？]+$/u', 'max:50'],
             ]);
         } catch (Exception $e) {
             Log::debug($e);
