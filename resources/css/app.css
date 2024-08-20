@@ -8,3 +8,13 @@
   width: 2rem;
   height: 2rem;
 }
+
+.chat-area {
+  max-height: 500px;
+  overflow-y: auto;
+  margin: 1rem 0;
+  padding: .5rem;
+  border-right: 1px solid #C0C0C0;
+  border-left: 1px solid #C0C0C0;
+  border-bottom: 1px solid #C0C0C0;
+}
