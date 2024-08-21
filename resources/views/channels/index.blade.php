@@ -7,11 +7,19 @@
             <div class="chat-area">
                 <ul id="board">
                     @foreach($posts as $post)
-                    <div class="flex flex-col w-full max-w-[320px] mb-2">
-                        <div class="flex flex-col leading-1.5 p-1 border-green-400 bg-green-400 rounded-e-xl rounded-es-xl dark:bg-green-700">
-                            <li class="flex flex-col leading-1.5 p-4 border-green-400 bg-green-400 rounded-e-xl rounded-es-xl dark:bg-green-700">
-                                <p class="text-sm font-normal text-gray-900 dark:text-white">{{ $post->text }}</p>
-                            </li>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex flex-col max-w-[320px] mb-2">
+                            <div class="flex flex-col leading-1.5 p-1 border-green-400 bg-green-400 rounded-e-xl rounded-es-xl dark:bg-green-700">
+                                <li class="flex flex-col leading-1.5 p-4 border-green-400 bg-green-400 rounded-e-xl rounded-es-xl dark:bg-green-700">
+                                    <p class="text-sm font-normal text-gray-900 dark:text-white">{{ $post->text }}</p>
+                                </li>
+                            </div>
+                        </div>
+                        <div class="flex flex-col col-end-4 h-10 bg-orange-500 items-center justify-center max-w-[80px] m-auto rounded-xl">
+                            <form action="{{ route('post.destroy', ['id' => $post->id]) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="mx-4">削除</button>
+                            </form>
                         </div>
                     </div>
                     @endforeach

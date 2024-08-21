@@ -43,5 +43,6 @@ Route::middleware('auth')->group(function () {
 // Pusher
 Route::get("/posts", [PostController::class, 'index'])->name('post.index');
 Route::post("/posts/store", [PostController::class, 'store'])->name('post.store');
+Route::post("/posts/destroy/{id}", [PostController::class, 'destroy'])->name('post.destroy');
 
 require __DIR__ . '/auth.php';
