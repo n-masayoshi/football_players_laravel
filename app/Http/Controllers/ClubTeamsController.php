@@ -4,15 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\ClubTeam;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Constants\CountriesName;
+use App\Providers\RouteServiceProvider;
+use App\Http\Service\GetCountryService;
+use App\Models\Players\JapanesePlayer;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Exception;
 
-class ClubTeamController extends Controller
+class ClubTeamsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $clubTeams = ClubTeam::select('club_team_id', 'country_id', 'club_team_name')->paginate(5);
+        return view("ClubTeam.index", compact('clubTeams'));
     }
 
     /**

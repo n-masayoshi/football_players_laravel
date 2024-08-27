@@ -11,11 +11,10 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\View\View;
 use Carbon\Carbon;
 use Exception;
-use PhpParser\Node\Expr\Empty_;
+// use Illuminate\Database\Eloquent\Collection;
+// use Illuminate\View\View;
 
 class PlayersController extends Controller
 {

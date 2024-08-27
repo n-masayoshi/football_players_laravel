@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\PlayersController;
 use App\Http\Controllers\JapanesePlayersController;
+use App\Http\Controllers\ClubTeamsController;
 use App\Http\Controllers\PostController;
 
 /*
@@ -18,10 +19,12 @@ use App\Http\Controllers\PostController;
 //     return view('welcome');
 // });
 
+// 国
 Route::get('/', [CountriesController::class, 'index'])->name('country.index');
 Route::get('/countries', [CountriesController::class, 'index'])->name('country.index');
 Route::get('/countries/{country_id}', [CountriesController::class, 'show'])->name('countries.show');
 
+// 選手
 Route::get("/players/japan/{country_id}", [PlayersController::class, "index"])->name('players.index');
 Route::post("/players/japan/{country_id}", [PlayersController::class, "search"])->name('players.search');
 
@@ -29,6 +32,8 @@ Route::get("/japan/players/create/{country_id}", [PlayersController::class, "cre
 
 Route::post("/japan/players/create", [JapanesePlayersController::class, "store"])->name('japan.store');
 
+// クラブチーム
+Route::get('/clubteams', [ClubTeamsController::class, 'index'])->name('clubteam.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
