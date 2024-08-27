@@ -23,7 +23,7 @@ class ClubTeamsController extends Controller
     public function index()
     {
         $clubTeams = ClubTeam::select('club_team_id', 'country_id', 'club_team_name')->paginate(5);
-        return view("Clubteam.index", compact('clubTeams'));
+        return view("clubteam.index", compact('clubTeams'));
     }
 
     /**
