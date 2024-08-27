@@ -57,4 +57,9 @@ class JapanesePlayer extends Model
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function clubteam(): BelongsTo
+    {
+        return $this->belongsTo(ClubTeam::class);
+    }
 }
