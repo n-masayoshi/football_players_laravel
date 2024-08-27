@@ -7,12 +7,14 @@ use App\Constants\CountriesName;
 use App\Providers\RouteServiceProvider;
 use App\Http\Service\GetCountryService;
 use App\Models\Players\JapanesePlayer;
+use App\Models\ClubTeam;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Exception;
+
 // use Illuminate\Database\Eloquent\Collection;
 // use Illuminate\View\View;
 
@@ -36,7 +38,11 @@ class PlayersController extends Controller
         $getCountry = new GetCountryService();
         $country = $getCountry->getCountryNameAndModel($country_id);
         $players = $country[1];
-        return view("Players.{$country[0]}.index", compact('players'));
+
+        // クラブチームのデータを取得
+        $clubTeams = ClubTeam::select('club_team_id', 'club_team_name')->get();
+
+        return view("Players.{$country[0]}.index", compact('players', 'clubTeams'));
     }
 
     /**
@@ -74,12 +80,16 @@ class PlayersController extends Controller
         /**
          * クラブチーム
          */
-        if ($request->club_team_name && $request->club_team_name != '') {
-            $players_query->where('club_team_name', 'LIKE', '%' . $request->club_team_name . '%');
+        if ($request->club_team_id && $request->club_team_id != '') {
+            $players_query->where('club_team_id', $request->club_team_id);
         }
-
+        // 選手データ取得
         $players = $players_query->get();
-        return view("Players.Japan.index", compact('players'));
+
+        // クラブチームのデータを取得
+        $clubTeams = ClubTeam::select('club_team_id', 'club_team_name')->get();
+
+        return view("Players.Japan.index", compact('players', 'clubTeams'));
     }
 
     /**
