@@ -30,7 +30,7 @@ Route::post("/players/japan/{country_id}", [PlayersController::class, "search"])
 
 Route::get("/japan/players/create/{country_id}", [PlayersController::class, "create"])->name('players.create');
 
-Route::post("/japan/players/create", [JapanesePlayersController::class, "store"])->name('japan.store');
+Route::post("/japan/players/create", [PlayersController::class, "store"])->name('japan.store');
 
 // クラブチーム
 Route::get('/clubteams', [ClubTeamsController::class, 'index'])->name('clubteam.index');
