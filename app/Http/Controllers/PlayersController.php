@@ -15,16 +15,11 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Exception;
 
-// use Illuminate\Database\Eloquent\Collection;
-// use Illuminate\View\View;
-
 class PlayersController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    // public function index(int $country_id)
-
     public function index(int $country_id)
     {
         // TODO: 現状、日本以外をクリックしたら、はじく制御になっている。
@@ -97,22 +92,27 @@ class PlayersController extends Controller
      */
     public function create(int $country_id)
     {
-        return view("Players.Japan.create", ['country_id' => $country_id]);
+        // クラブチームのデータを取得
+        $clubTeams = ClubTeam::select('club_team_id', 'club_team_name')->get();
+
+        return view("Players.Japan.create", [
+            'country_id' => $country_id,
+            'clubTeams' => $clubTeams
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      * 日本人選手を登録する
      */
-    public function store(Request $request, int $country_id)
+    public function store(Request $request)
     {
         try {
             $request->validate([
-                // 'country_id' => ['required', 'integer'],
-                'player_name' => ['required', 'string'],
-                'player_age' => ['required', 'integer'],
-                'club_team_id' => ['required', 'integer'],
-                'club_team_name' => ['required', 'string'],
+                'country_id' => 'required',
+                'player_name' => 'required|string',
+                'player_age' => 'required',
+                'club_team_id' => 'required',
             ]);
         } catch (Exception $e) {
             Log::debug($e);
@@ -121,12 +121,15 @@ class PlayersController extends Controller
 
         DB::beginTransaction();
         try {
+            // クラブチーム名を取得
+            $clubTeamName = DB::table('m_club_teams')->where('club_team_id', $request->club_team_id)->value('club_team_name');
+
             $japanesePlayers = JapanesePlayer::create([
-                'country_id' => $country_id,
+                'country_id' => $request->country_id,
                 'player_name' => $request->player_name,
                 'player_age' => $request->player_age,
                 'club_team_id' => $request->club_team_id,
-                'club_team_name' => $request->club_team_name,
+                'club_team_name' => $clubTeamName,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);

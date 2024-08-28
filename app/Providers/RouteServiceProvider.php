@@ -19,7 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/countries';
     public const CHATTING = '/posts';
-    public const JAPANESE_PLAYERS_INDEX = '/japan/players';
+    public const JAPANESE_PLAYERS_INDEX = '/players/japan/1';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
