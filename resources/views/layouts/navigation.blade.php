@@ -13,14 +13,14 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     {{-- <p>Football Players</p> --}}
-                    <x-nav-link :href="route('country.index')" :active="request()->routeIs('country.index')">
+                    <x-nav-link :href="route('country.index')" :active="request()->routeIs('country.*')">
                         {{ __('Countries') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('post.index')" :active="request()->routeIs('post.index')">
-                        {{ __('Chatting') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('clubteam.index')" :active="request()->routeIs('clubteam.index')">
+                    <x-nav-link :href="route('clubteam.index')" :active="request()->routeIs('clubteam.*')">
                         {{ __('Club Teams') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('post.index')" :active="request()->routeIs('post.*')">
+                        {{ __('Chatting') }}
                     </x-nav-link>
                 </div>
             </div>
