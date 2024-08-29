@@ -51,7 +51,7 @@ class CountriesController extends Controller
         // 検索フォーム用
         $allCountries = Country::all();
 
-        return view("country.index", compact('countries', 'allCountries'));
+        return view("Country.index", compact('countries', 'allCountries'));
     }
 
     /**
