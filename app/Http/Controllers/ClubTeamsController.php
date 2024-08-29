@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ClubTeam;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Constants\CountriesName;
+use App\Constants\clubTeamsName;
 use App\Providers\RouteServiceProvider;
 use App\Http\Service\GetCountryService;
 use App\Models\Players\JapanesePlayer;
@@ -22,8 +22,43 @@ class ClubTeamsController extends Controller
      */
     public function index()
     {
-        $clubTeams = ClubTeam::select('club_team_id', 'country_id', 'club_team_name')->paginate(5);
-        return view("clubteam.index", compact('clubTeams'));
+        $clubTeams = ClubTeam::select('club_team_id', 'club_team_id', 'club_team_name')->paginate(5);
+
+        // 検索フォーム用
+        $allClubTeams = ClubTeam::all();
+        return view("clubteam.index", compact('clubTeams', 'allClubTeams'));
+    }
+
+    /**
+     * 検索機能
+     */
+    public function search(Request $request)
+    {
+        if (isset($request) && $request->reset) {
+            $request = new Request();
+        }
+
+        $request->validate([
+            'club_team_id' => 'required'
+        ]);
+
+        $clubTeams = [];
+        $clubTeams_query = ClubTeam::query(); // クエリビルダ
+
+        /**
+         * クラブチーム
+         */
+        if ($request->club_team_id && $request->club_team_id != '') {
+            $clubTeams_query->where('club_team_id', $request->club_team_id);
+        }
+
+        // 選手データ取得
+        $clubTeams = $clubTeams_query->paginate(5);
+
+        // 検索フォーム用
+        $allClubTeams = ClubTeam::all();
+
+        return view("clubteam.index", compact('clubTeams', 'allClubTeams'));
     }
 
     /**

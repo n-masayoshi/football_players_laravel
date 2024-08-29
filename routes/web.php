@@ -22,7 +22,8 @@ use App\Http\Controllers\PostController;
 // 国
 Route::get('/', [CountriesController::class, 'index'])->name('country.index');
 Route::get('/countries', [CountriesController::class, 'index'])->name('country.index');
-Route::get('/countries/{country_id}', [CountriesController::class, 'show'])->name('countries.show');
+Route::get('/countries/{country_id}', [CountriesController::class, 'show'])->name('country.show');
+Route::post("/countries", [CountriesController::class, "search"])->name('country.search');
 
 // 選手
 Route::get("/players/japan/{country_id}", [PlayersController::class, "index"])->name('players.index');
@@ -34,6 +35,7 @@ Route::post("/japan/players/create", [PlayersController::class, "store"])->name(
 
 // クラブチーム
 Route::get('/clubteams', [ClubTeamsController::class, 'index'])->name('clubteam.index');
+Route::post("/clubteams", [ClubTeamsController::class, "search"])->name('clubteam.search');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
