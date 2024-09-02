@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Constants\CountriesName;
 use App\Providers\RouteServiceProvider;
 use App\Http\Service\GetCountryService;
 use App\Models\Players\JapanesePlayer;
@@ -20,24 +19,16 @@ class PlayersController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(int $country_id)
+    public function index($countryId)
     {
-        // TODO: 現状、日本以外をクリックしたら、はじく制御になっている。
-        if ($country_id != CountriesName::JAPAN) {
-            return redirect('/countries')
-                ->with([
-                    'message' => 'データが存在しません。',
-                    'status' => 'alert'
-                ]);
-        }
         $getCountry = new GetCountryService();
-        $country = $getCountry->getCountryNameAndModel($country_id);
+        $country = $getCountry->getCountryNameAndModel($countryId);
         $players = $country[1];
 
         // クラブチームのデータを取得
-        $clubTeams = ClubTeam::select('club_team_id', 'club_team_name')->get();
+        $clubTeams = ClubTeam::all();
 
-        return view("Players.{$country[0]}.index", compact('players', 'clubTeams'));
+        return view("players.{$country[0]}.index", compact('players', 'clubTeams', 'countryId'));
     }
 
     /**
@@ -45,6 +36,7 @@ class PlayersController extends Controller
      */
     public function search(Request $request)
     {
+        dd($request->all());
         if (isset($request) && $request->reset) {
             $request = new Request();
         }
@@ -56,6 +48,8 @@ class PlayersController extends Controller
         ]);
 
         $players = [];
+        $getCountry = new GetCountryService();
+        $country = $getCountry->getCountryNameAndModel($request->country_id);
         $players_query = JapanesePlayer::query(); // クエリビルダ
 
         /**

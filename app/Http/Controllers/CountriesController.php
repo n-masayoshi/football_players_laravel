@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use App\Models\ClubTeam;
+use App\Http\Service\GetCountryService;
+use App\Http\Service\SearchEachCountryPlayersService;
 use Illuminate\Http\Request;
-use Illuminate\Http\Service\GetCountryService;
+// use Illuminate\Http\Service\GetCountryService;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
+use App\Models\Players\JapanesePlayer;
 
 class CountriesController extends Controller
 {
@@ -57,7 +61,35 @@ class CountriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show() {}
+    public function show($countryId)
+    {
+        $getCountry = new GetCountryService();
+        $country = $getCountry->getCountryNameAndModel($countryId);
+        $players = $country[1];
+
+        // クラブチームのデータを取得
+        $clubTeams = ClubTeam::all();
+
+        return view("country.show", compact('players', 'clubTeams', 'countryId'));
+    }
+
+    public function searchPlayers(Request $request, $countryId)
+    {
+        // dd($request->all());
+        if (isset($request) && $request->reset && isset($countryId)) {
+            $request = new Request();
+        }
+
+        $players = [];
+        $getPlayers = new SearchEachCountryPlayersService();
+        $players = $getPlayers->searchEachCountryPlayers($countryId, $request);
+        // dd($players);
+
+        // クラブチームのデータを取得
+        $clubTeams = ClubTeam::all();
+
+        return view("country.show", compact('players', 'clubTeams', 'countryId'));
+    }
 
     /**
      * Show the form for creating a new resource.
