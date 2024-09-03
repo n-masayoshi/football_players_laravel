@@ -64,12 +64,21 @@ class CountriesController extends Controller
     {
         $getCountry = new GetCountryService();
         $country = $getCountry->getCountryNameAndModel($countryId);
-        $players = $country[1];
 
+        // 国名が 空 ならアラートを表示する
+        if ($country[0] == "") {
+            return redirect('/countries')
+                ->with([
+                    'message' => 'データが存在しません。',
+                    'status' => 'alert'
+                ]);
+        }
+
+        $players = $country[1];
         // クラブチームのデータを取得
         $clubTeams = ClubTeam::all();
 
-        return view("country.show", compact('players', 'clubTeams', 'countryId'));
+        return view("Country.show", compact('players', 'clubTeams', 'countryId'));
     }
 
     public function searchPlayers(Request $request, $countryId)

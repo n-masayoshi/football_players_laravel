@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Exception;
+use PhpParser\Node\Expr\Empty_;
 
 class PlayersController extends Controller
 {
@@ -21,6 +22,15 @@ class PlayersController extends Controller
     {
         $getCountry = new GetCountryService();
         $country = $getCountry->getCountryNameAndModel($countryId);
+
+        // 国名が 空 ならアラートを表示する
+        if ($country[0] == "") {
+            return redirect('/countries')
+                ->with([
+                    'message' => 'データが存在しません。',
+                    'status' => 'alert'
+                ]);
+        }
         $players = $country[1];
 
         // クラブチームのデータを取得
@@ -72,7 +82,7 @@ class PlayersController extends Controller
             $storePlayers = new StorePlayersService();
             $storePlayers->storePlayers($request, $clubTeamName);
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::debug($e);
             DB::rollback();
             return redirect()->back()->with('error', '選手登録に失敗しました。')->withInput();
