@@ -96,7 +96,7 @@ class CountriesController extends Controller
         // クラブチームのデータを取得
         $clubTeams = ClubTeam::all();
 
-        return view("country.show", compact('players', 'clubTeams', 'countryId'));
+        return view("Country.show", compact('players', 'clubTeams', 'countryId'));
     }
 
     /**
