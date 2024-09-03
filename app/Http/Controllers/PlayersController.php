@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Exception;
-use PhpParser\Node\Expr\Empty_;
 
 class PlayersController extends Controller
 {
