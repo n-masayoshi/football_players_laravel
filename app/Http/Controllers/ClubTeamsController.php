@@ -5,15 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\ClubTeam;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Constants\clubTeamsName;
-use App\Providers\RouteServiceProvider;
-use App\Http\Service\GetCountryService;
-use App\Models\Players\JapanesePlayer;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
-use Exception;
 
 class ClubTeamsController extends Controller
 {

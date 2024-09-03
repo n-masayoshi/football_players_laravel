@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 // use Illuminate\Http\Service\GetCountryService;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
-use App\Models\Players\JapanesePlayer;
 
 class CountriesController extends Controller
 {
@@ -102,10 +101,7 @@ class CountriesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(Request $request) {}
 
     /**
      * Show the form for editing the specified resource.

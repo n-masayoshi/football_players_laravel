@@ -40,7 +40,6 @@
             </a>
             @endif
         </div>
-        {{-- {{ $countries->links() }} --}}
     </div>
 </div>
 @endsection

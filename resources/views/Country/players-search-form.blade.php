@@ -10,7 +10,6 @@
     </h2>
     <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
         <div class="text-gray-900 p-5 border border-sky-200 dark:border-sky-700 dark:bg-sky-900">
-            {{-- {{dd($countryId);}} --}}
             <!-- Validation Errors -->
             <x-search-form-validation-errors class="mb-4" :errors="$errors" />
             <form class="space-y-4" method="POST" action="{{ route('country.players.search', ['country_id' => $countryId]) }}">

@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\PlayersController;
-use App\Http\Controllers\JapanesePlayersController;
 use App\Http\Controllers\ClubTeamsController;
 use App\Http\Controllers\PostController;
 
@@ -28,6 +27,7 @@ Route::post("/countries", [CountriesController::class, "search"])->name('country
 // 選手一覧内を検索
 Route::post("/countries/{country_id}/players", [CountriesController::class, "searchPlayers"])->name('country.players.search');
 Route::get("/countries/{country_id}/players/create", [PlayersController::class, "create"])->name('players.create');
+Route::post("/countries/{country_id}/players/store", [PlayersController::class, "store"])->name('players.store');
 
 // クラブチーム
 Route::get('/clubteams', [ClubTeamsController::class, 'index'])->name('clubteam.index');
