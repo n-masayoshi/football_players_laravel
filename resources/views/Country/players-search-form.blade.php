@@ -12,7 +12,7 @@
         <div class="text-gray-900 p-5 border border-sky-200 dark:border-sky-700 dark:bg-sky-900">
             <!-- Validation Errors -->
             <x-search-form-validation-errors class="mb-4" :errors="$errors" />
-            <form class="space-y-4" method="POST" action="{{ route('players.search', ['country_id' => '1']) }}">
+            <form class="space-y-4" method="POST" action="{{ route('country.players.search', ['country_id' => $countryId]) }}">
                 @csrf
                 <div class="flex">
                     <div class="w-1/4 px-3">

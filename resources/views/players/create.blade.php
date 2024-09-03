@@ -3,7 +3,7 @@
 
 <div class="row max-w-screen-lg mx-auto">
     <div class="col-md-8 col-lg-9">
-        <form method="POST" action="{{ route('japan.store')}}" class="max-w-sm mx-auto">
+        <form method="POST" action="{{ route('players.store', ['country_id' => $country_id]) }}" class="max-w-sm mx-auto">
             @csrf
             <div class="mb-5">
                 <label for="country_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">国 ID</label>

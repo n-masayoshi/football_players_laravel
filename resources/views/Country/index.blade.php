@@ -17,7 +17,7 @@
                     @forelse ($countries as $country)
                     <tr>
                         <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
-                            <a href="{{ route('players.index', ['country_id' => $country->country_id]) }}">
+                            <a href="{{ route('country.show', ['country_id' => $country->country_id]) }}">
                                 {{ $country->country_name }}
                             </a>
                         </td>
