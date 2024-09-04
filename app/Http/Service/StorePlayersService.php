@@ -4,6 +4,7 @@ namespace App\Http\Service;
 
 use App\Models\Players\JapanesePlayer;
 use App\Models\Players\EnglandPlayer;
+use App\Models\Players\SpainPlayer;
 use Illuminate\Auth\Events\Registered;
 use Carbon\Carbon;
 
@@ -28,8 +29,15 @@ class StorePlayersService
                     ]);
                     break;
                 case 2:
-                    // $country_name = "spain";
-                    // $players = SpainPlayer::all();
+                    $players = SpainPlayer::create([
+                        'country_id' => $request->country_id,
+                        'player_name' => $request->player_name,
+                        'player_age' => $request->player_age,
+                        'club_team_id' => $request->club_team_id,
+                        'club_team_name' => $clubTeamName,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ]);
                     break;
                 case 3:
                     // $country_name = "brazil";

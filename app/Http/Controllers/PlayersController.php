@@ -84,7 +84,7 @@ class PlayersController extends Controller
         } catch (Exception $e) {
             Log::debug($e);
             DB::rollback();
-            return redirect()->back()->with('error', '選手登録に失敗しました。')->withInput();
+            return redirect()->back()->with('error', '選手の登録に失敗しました。')->withInput();
         }
 
         // リダイレクト先のURLを取得

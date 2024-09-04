@@ -2,9 +2,6 @@
 
 namespace App\Http\Service;
 
-use App\Models\Players\JapanesePlayer;
-use App\Models\Players\EnglandPlayer;
-use App\Models\ClubTeam;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -21,10 +18,13 @@ class GetCountryService
                     $country_name = "japan";
                     $players = DB::table('t_japanese_players')->where('country_id', $countryId)->get();
                     break;
-                    // case 2:
-                    //     $country_name = "spain";
-                    //     // $players = SpainPlayer::all();
-                    //     break;
+                case 2:
+                    $country_name = "spain";
+                    $players = DB::table('t_spain_players')
+                        ->join('m_club_teams', 't_spain_players.club_team_id', '=', 'm_club_teams.club_team_id')
+                        ->select('t_spain_players.*', 'm_club_teams.club_team_name')
+                        ->get();
+                    break;
                     // case 3:
                     //     $country_name = "brazil";
                     //     // $players = BrazilPlayer::all();
