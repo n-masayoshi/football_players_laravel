@@ -20,10 +20,10 @@
                     @forelse ($players as $player)
                     <tr>
                         <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">{{ $player->player_name }}</td>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-4 text-slate-500 dark:text-slate-400">{{ $player->player_age }}</td>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-4 text-slate-500 dark:text-slate-400">{{ $player->club_team_name }}</td>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-4 text-slate-500 dark:text-slate-400"></td>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-4 text-slate-500 dark:text-slate-400"></td>
+                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-1.5 text-slate-500 dark:text-slate-400">{{ $player->player_age }}</td>
+                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-1 text-slate-500 dark:text-slate-400">{{ $player->club_team_name }}</td>
+                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
+                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
                     </tr>
                     @empty
                     <tr>
