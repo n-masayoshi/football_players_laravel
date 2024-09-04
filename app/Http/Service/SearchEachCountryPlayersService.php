@@ -47,9 +47,22 @@ class SearchEachCountryPlayersService
 
                 $players = $playersQuery->get();
                 break;
-                // case 3:
-                //     $players = BrazilPlayer::all();
-                //     break;
+            case 3:
+                $playersQuery = DB::table('t_brazil_players')
+                    ->join('m_club_teams', 't_brazil_players.club_team_id', '=', 'm_club_teams.club_team_id')
+                    ->select('t_brazil_players.*', 'm_club_teams.club_team_name');
+                if ($request->player_name != null) {
+                    $playersQuery->where('t_brazil_players.player_name', 'LIKE', '%' . $request->player_name . '%');
+                }
+                if ($request->player_age != null) {
+                    $playersQuery->where('t_brazil_players.player_age', '=', $request->player_age);
+                }
+                if ($request->club_team_id != null) {
+                    $playersQuery->where('m_club_teams.club_team_id', '=', $request->club_team_id);
+                }
+
+                $players = $playersQuery->get();
+                break;
                 // case 4:
                 //     $players = FrancePlayer::all();
                 //     break;
