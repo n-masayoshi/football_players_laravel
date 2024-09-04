@@ -9,11 +9,6 @@
 
         <link href="https://cdn.jsdelivr.net/npm/flowbite@latest/dist/flowbite.min.css" rel="stylesheet">
 
-        {{-- css/app.css --}}
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-
         <!-- Flowbite JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/flowbite@latest/dist/flowbite.min.js"></script>
 
