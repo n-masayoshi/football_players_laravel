@@ -30,6 +30,15 @@ class StorePlayersService
                     ]);
                     break;
                 case 2:
+                    $players = SpainPlayer::create([
+                        'country_id' => $request->country_id,
+                        'player_name' => $request->player_name,
+                        'player_age' => $request->player_age,
+                        'club_team_id' => $request->club_team_id,
+                        'club_team_name' => $clubTeamName,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ]);
                     break;
                 case 3:
                     $players = BrazilPlayer::create([

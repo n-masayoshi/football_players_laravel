@@ -16,6 +16,7 @@ class RedirectRouteService
                 return RouteServiceProvider::JAPANESE_PLAYERS_INDEX;
                 break;
             case 2:
+                return RouteServiceProvider::SPAIN_PLAYERS_INDEX;
                 break;
             case 3:
                 return RouteServiceProvider::BRAZIL_PLAYERS_INDEX;

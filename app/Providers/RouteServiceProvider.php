@@ -20,6 +20,7 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/countries';
     public const CHATTING = '/posts';
     public const JAPANESE_PLAYERS_INDEX = '/countries/1/players';
+    public const SPAIN_PLAYERS_INDEX = '/countries/2/players';
     public const BRAZIL_PLAYERS_INDEX = '/countries/3/players';
     public const ENGLAND_PLAYERS_INDEX = '/countries/8/players';
 

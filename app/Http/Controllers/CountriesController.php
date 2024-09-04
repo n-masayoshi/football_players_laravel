@@ -82,7 +82,6 @@ class CountriesController extends Controller
 
     public function searchPlayers(Request $request, $countryId)
     {
-        // dd($request->all());
         if (isset($request) && $request->reset && isset($countryId)) {
             $request = new Request();
         }
@@ -90,7 +89,6 @@ class CountriesController extends Controller
         $players = [];
         $getPlayers = new SearchEachCountryPlayersService();
         $players = $getPlayers->searchEachCountryPlayers($countryId, $request);
-        // dd($players);
 
         // クラブチームのデータを取得
         $clubTeams = ClubTeam::all();
