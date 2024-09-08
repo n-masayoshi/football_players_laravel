@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClubTeam;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Service\ClubTeamPlayerService;
+use Illuminate\Http\Request;
 
 class ClubTeamsController extends Controller
 {
@@ -29,27 +30,27 @@ class ClubTeamsController extends Controller
             $request = new Request();
         }
 
-        $request->validate([
-            'club_team_id' => 'required'
-        ]);
+        $players = [];
+        $searchPlayersService = new ClubTeamPlayerService();
+        $players = $searchPlayersService->searchPlayers($request);
 
-        $clubTeams = [];
-        $clubTeams_query = ClubTeam::query(); // クエリビルダ
+        // クラブチームID
+        $clubTeamId = $request->club_team_id;
 
-        /**
-         * クラブチーム
-         */
-        if ($request->club_team_id && $request->club_team_id != '') {
-            $clubTeams_query->where('club_team_id', $request->club_team_id);
-        }
+        return view("clubteam.show", compact('players', 'clubTeamId'));
+    }
 
-        // 選手データ取得
-        $clubTeams = $clubTeams_query->paginate(5);
+    /**
+     * 選手一覧ページ
+     * indexPageにて、クラブチームを押下=>club_team_idを渡す
+     * club_team_idを使って各国の選手テーブルと照らし合わせていく
+     */
+    public function show(int $clubTeamId)
+    {
+        $getPlayersService = new ClubTeamPlayerService();
+        $players = $getPlayersService->getPlayers($clubTeamId);
 
-        // 検索フォーム用
-        $allClubTeams = ClubTeam::all();
-
-        return view("clubteam.index", compact('clubTeams', 'allClubTeams'));
+        return view("clubteam.show", compact('players', 'clubTeamId'));
     }
 
     /**
@@ -64,14 +65,6 @@ class ClubTeamsController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(ClubTeam $clubTeam)
     {
         //
     }

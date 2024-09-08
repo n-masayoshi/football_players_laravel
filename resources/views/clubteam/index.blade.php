@@ -19,7 +19,11 @@
                 <tbody class="bg-white dark:bg-slate-800">
                     @forelse ($clubTeams as $clubTeam)
                     <tr>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">{{ $clubTeam->club_team_name }}</td>
+                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                            <a href="{{ route('clubteam.show', ['club_team_id' => $clubTeam->club_team_id]) }}">
+                                {{ $clubTeam->club_team_name }}
+                            </a>
+                        </td>
                         {{-- <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-4 text-slate-500 dark:text-slate-400">{{ $clubteam->leadgue_wins_counts }}</td> --}}
                         {{-- <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-4 text-slate-500 dark:text-slate-400">{{ $player->club_team_name }}</td> --}}
                         {{-- <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-4 text-slate-500 dark:text-slate-400"></td> --}}
