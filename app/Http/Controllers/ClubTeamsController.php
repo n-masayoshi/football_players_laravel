@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ClubTeam;
 use App\Http\Controllers\Controller;
-use App\Http\Service\GetPlayerService;
+use App\Http\Service\ClubTeamPlayerService;
 use Illuminate\Http\Request;
 
 class ClubTeamsController extends Controller
@@ -30,27 +30,14 @@ class ClubTeamsController extends Controller
             $request = new Request();
         }
 
-        $request->validate([
-            'club_team_id' => 'required'
-        ]);
+        $players = [];
+        $searchPlayersService = new ClubTeamPlayerService();
+        $players = $searchPlayersService->searchPlayers($request);
 
-        $clubTeams = [];
-        $clubTeams_query = ClubTeam::query(); // クエリビルダ
+        // クラブチームID
+        $clubTeamId = $request->club_team_id;
 
-        /**
-         * クラブチーム
-         */
-        if ($request->club_team_id && $request->club_team_id != '') {
-            $clubTeams_query->where('club_team_id', $request->club_team_id);
-        }
-
-        // 選手データ取得
-        $clubTeams = $clubTeams_query->paginate(5);
-
-        // 検索フォーム用
-        $allClubTeams = ClubTeam::all();
-
-        return view("clubteam.index", compact('clubTeams', 'allClubTeams'));
+        return view("clubteam.show", compact('players', 'clubTeamId'));
     }
 
     /**
@@ -60,10 +47,10 @@ class ClubTeamsController extends Controller
      */
     public function show(int $clubTeamId)
     {
-        $getPlayersService = new GetPlayerService();
+        $getPlayersService = new ClubTeamPlayerService();
         $players = $getPlayersService->getPlayers($clubTeamId);
 
-        return view("clubteam.show", compact('players'));
+        return view("clubteam.show", compact('players', 'clubTeamId'));
     }
 
     /**
