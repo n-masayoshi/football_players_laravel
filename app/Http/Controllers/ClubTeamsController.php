@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClubTeam;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Service\GetPlayerService;
+use Illuminate\Http\Request;
 
 class ClubTeamsController extends Controller
 {
@@ -53,6 +54,19 @@ class ClubTeamsController extends Controller
     }
 
     /**
+     * 選手一覧ページ
+     * indexPageにて、クラブチームを押下=>club_team_idを渡す
+     * club_team_idを使って各国の選手テーブルと照らし合わせていく
+     */
+    public function show(int $clubTeamId)
+    {
+        $getPlayersService = new GetPlayerService();
+        $players = $getPlayersService->getPlayers($clubTeamId);
+
+        return view("clubteam.show", compact('players'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -64,14 +78,6 @@ class ClubTeamsController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(ClubTeam $clubTeam)
     {
         //
     }
