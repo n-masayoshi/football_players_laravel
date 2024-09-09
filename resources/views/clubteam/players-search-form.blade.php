@@ -12,7 +12,7 @@
         <div class="text-gray-900 p-5 border border-sky-200 dark:border-sky-700 dark:bg-sky-900">
             <!-- Validation Errors -->
             <x-search-form-validation-errors class="mb-4" :errors="$errors" />
-            <form class="space-y-4" method="POST" action="{{ route('clubteam.search', ['club_team_id' => $clubTeamId]) }}">
+            <form class="space-y-4" method="POST" action="{{ route('clubteam.players.search', ['club_team_id' => $clubTeamId]) }}">
                 @csrf
                 <div class="flex">
                     <div class="w-1/4 px-3">
@@ -26,13 +26,6 @@
                         <x-input-label for="player_age" :value="'年齢'" />
                         <x-text-input id="player_age" class="block mt-1 w-full" type="number" name="player_age" :value="old('player_age', $request->player_age)" for="player_age" :value="''" min="10" max="200" autocomplete="年齢" />
                     </div>
-                    {{-- <div class="w-1/4 px-3 ">
-                        <x-input-label for="country_name" :value="'国名'" />
-                        <x-text-input id="country_name" class="block mt-1 w-full" type="text" name="country_name" :value="old('country_name', $request->country_name)" for="country_name" :value="''" autocomplete="国名" />
-                        @error('country_name')
-                            <span class="text-xs text-red-600">{{ $message }}</span>
-                        @enderror
-                    </div> --}}
                 </div>
                 <div class="text-center pt-4 flex justify-end">
                     <button type="submit" class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-md">

@@ -33,6 +33,8 @@ Route::post("/countries/{country_id}/players/store", [PlayersController::class, 
 Route::get('/clubteams', [ClubTeamsController::class, 'index'])->name('clubteam.index');
 Route::post("/clubteams", [ClubTeamsController::class, "search"])->name('clubteam.search');
 Route::get('/clubteams/{club_team_id}/players', [ClubTeamsController::class, 'show'])->name('clubteam.show');
+// 選手一覧内を検索
+Route::post("/clubteams/{club_team_id}/players", [ClubTeamsController::class, "search"])->name('clubteam.players.search');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

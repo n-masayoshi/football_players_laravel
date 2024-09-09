@@ -24,18 +24,15 @@ class ClubTeamsController extends Controller
     /**
      * 検索機能
      */
-    public function search(Request $request)
+    public function search(Request $request, $clubTeamId)
     {
-        if (isset($request) && $request->reset) {
+        if (isset($request) && $request->reset && isset($clubTeamId)) {
             $request = new Request();
         }
 
         $players = [];
         $searchPlayersService = new ClubTeamPlayerService();
-        $players = $searchPlayersService->searchPlayers($request);
-
-        // クラブチームID
-        $clubTeamId = $request->club_team_id;
+        $players = $searchPlayersService->searchPlayers($request, $clubTeamId);
 
         return view("clubteam.show", compact('players', 'clubTeamId'));
     }
