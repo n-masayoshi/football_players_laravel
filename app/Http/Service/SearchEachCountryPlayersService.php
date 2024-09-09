@@ -95,6 +95,6 @@ class SearchEachCountryPlayersService
                 break;
         }
 
-        return ($players);
+        return $players;
     }
 }
