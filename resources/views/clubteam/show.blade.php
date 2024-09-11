@@ -33,13 +33,13 @@
                 </tbody>
             </table>
         </div>
-        {{-- <div class="mb-8 flex justify-end">
-            @if(isset($players[0]))
-            <a href="{{ route('players.create', ['country_id' => $players[0]->country_id]) }}" class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-6 mb-2 dark:bg-blue-600 dark:hover:bg-blue-600 focus:outline-none dark:focus:ring-blue-600">
+        <div class="mb-8 flex justify-end">
+            @if(isset($players))
+            <a href="{{ route('clubteam.players.create', ['club_team_id' => $clubTeamId]) }}" class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-6 mb-2 dark:bg-blue-600 dark:hover:bg-blue-600 focus:outline-none dark:focus:ring-blue-600">
                 選手登録
             </a>
             @endif
-        </div> --}}
+        </div>
     </div>
 </div>
 @endsection

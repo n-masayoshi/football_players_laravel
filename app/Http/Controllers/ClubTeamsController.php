@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClubTeam;
+use App\Models\Country;
 use App\Http\Controllers\Controller;
 use App\Http\Service\ClubTeamPlayerService;
 use Illuminate\Http\Request;
@@ -53,9 +54,11 @@ class ClubTeamsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(int $club_team_id)
     {
-        //
+        // 国名、セレクトボックス用
+        $countries = Country::all();
+        return view("clubteam.create", compact('countries', 'club_team_id'));
     }
 
     /**
@@ -63,7 +66,36 @@ class ClubTeamsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $request->validate([
+                'country_id' => 'required',
+                'player_name' => 'required|string',
+                'player_age' => 'required',
+                'club_team_id' => 'required',
+            ]);
+        } catch (Exception $e) {
+            Log::debug($e);
+            throw $e;
+        }
+
+        DB::beginTransaction();
+        try {
+            // クラブチーム名を取得
+            $clubTeamName = DB::table('m_club_teams')->where('club_team_id', $request->club_team_id)->value('club_team_name');
+
+            $storePlayers = new StorePlayersService();
+            $storePlayers->storePlayers($request, $clubTeamName);
+            DB::commit();
+        } catch (Exception $e) {
+            Log::debug($e);
+            DB::rollback();
+            return redirect()->back()->with('error', '選手の登録に失敗しました。')->withInput();
+        }
+
+        // リダイレクト先のURLを取得
+        $redirectRouteService = new RedirectRouteService();
+        $redirectRoute = $redirectRouteService->getRedirectRouteService($request->country_id);
+        return redirect($redirectRoute);
     }
 
     /**

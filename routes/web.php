@@ -33,6 +33,9 @@ Route::post("/countries/{country_id}/players/store", [PlayersController::class, 
 Route::get('/clubteams', [ClubTeamsController::class, 'index'])->name('clubteam.index');
 Route::post("/clubteams", [ClubTeamsController::class, "search"])->name('clubteam.search');
 Route::get('/clubteams/{club_team_id}/players', [ClubTeamsController::class, 'show'])->name('clubteam.show');
+// クラブチーム選手登録
+Route::get("/clubteams/{club_team_id}/players/create", [ClubTeamsController::class, "create"])->name('clubteam.players.create');
+Route::post("/clubteams/{club_team_id}/players/store", [ClubTeamsController::class, "store"])->name('clubteam.players.store');
 // 選手一覧内を検索
 Route::post("/clubteams/{club_team_id}/players", [ClubTeamsController::class, "search"])->name('clubteam.players.search');
 
